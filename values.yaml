@@ -1,0 +1,95 @@
+clusterZone: cluster.local
+controller:
+  additionalExistingSecrets: 
+    - name: jenkins-secrets
+      keyName: ADMIN-PASSWORD
+    - name: jenkins-secrets
+      keyName: ADMIN-USER
+    - name: jenkins-secrets
+      keyName: AWS-SM-ACCESSKEY
+    - name: jenkins-secrets
+      keyName: AWS-SM-SECRETKEY
+    - name: jenkins-secrets
+      keyName: ADMIN-TOKEN
+    - name: jenkins-secrets
+      keyName: JENKINS-URL
+    - name: jenkins-secrets
+      keyName: JJB-REPO
+  JCasC:
+    enabled: true 
+    configUrls: null
+    defaultConfig: false
+    overwriteConfiguration: false
+  agentListenerEnabled: true
+  agentListenerExternalTrafficPolicy: null
+  agentListenerHostPort: null
+  agentListenerLoadBalancerIP: null
+  agentListenerLoadBalancerSourceRanges:
+    - 0.0.0.0/0
+  agentListenerNodePort: null
+  agentListenerPort: 50000
+  agentListenerServiceAnnotations: {}
+  agentListenerServiceType: ClusterIP
+  cloudName: kubernetes
+  componentName: jenkins-controller
+  image:
+    pullPolicy: Always
+    registry: docker.io
+    repository: ranchertest/jenkins
+    tag: 2.440.2-jdk17-custom
+  initializeOnce: false
+  installLatestPlugins: false
+  installLatestSpecifiedPlugins: false
+  jenkinsAdminEmail: no@email.com
+  jenkinsHome: /var/jenkins_home
+  jenkinsRef: /usr/share/jenkins/ref
+  jenkinsWar: /usr/share/jenkins/jenkins.war
+  servicePort: 8080
+  serviceType: ClusterIP
+  sidecars:
+    additionalSidecarContainers: null
+    configAutoReload:
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+      enabled: true
+      env: {}
+      envFrom: null
+      folder: /var/jenkins_home/casc_configs
+      image:
+        registry: docker.io
+        repository: kiwigrid/k8s-sidecar
+        tag: 1.26.1
+      imagePullPolicy: IfNotPresent
+      reqRetryConnect: 10
+      resources: {}
+      scheme: http
+      skipTlsVerify: false
+      sleepTime: null
+      sshTcpPort: 1044
+  targetPort: 8080
+persistence:
+  volumes:
+  - name: jenkins-custom-casc-config
+    configMap:
+      name: jenkins-custom-casc-config
+  mounts:
+  - mountPath: /var/jenkins_home/casc_configs/custom
+    name: jenkins-custom-casc-config
+    readOnly: true
+kubernetesURL: https://kubernetes.default
+rbac:
+  create: true
+  readSecrets: true
+serviceAccount:
+  annotations: {}
+  create: true
+  extraLabels: {}
+  imagePullSecretName: null
+  name: null
+serviceAccountAgent:
+  annotations: {}
+  create: false
+  extraLabels: {}
+  imagePullSecretName: null
+  name: null
