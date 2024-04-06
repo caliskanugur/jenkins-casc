@@ -6,6 +6,7 @@
 * Credentials automatically loaded from AWS Secrets Manager (see secrets)
 * Admin token automatically configured (see secrets)
 * `Build Jenkins Jobs` pre-configured
+* **THERE IS NO PERSISTENCE - ANYTHING NOT BACKED IN THE CONFIGMAP, SECRETS, IMAGES, JENKINS JOB BUILDER WILL NOT COME BACK IF JENKINS RELOADS**
 
 ---
 
