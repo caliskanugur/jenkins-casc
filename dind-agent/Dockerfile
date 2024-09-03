@@ -1,4 +1,5 @@
-FROM jenkins/jnlp-agent-docker
+FROM jenkins/jnlp-agent-docker@sha256:eb9ab5139a598c3a210d5a491d3cc31db501cb870b011035e9cdbc0b5e661dfa 
+# Base image v3261.v9c670a_4748a_9, from the labels
 ENV PYTHONUNBUFFERED=1
 USER root
 
@@ -12,4 +13,4 @@ RUN pip3 install --no-cache --upgrade pip setuptools "jenkins-job-builder==5.1.0
 RUN export PATH="/home/jenkins/.local/bin:$PATH"
 
 USER jenkins
-ENTRYPOINT "/entrypoint.sh"
+ENTRYPOINT ["./entrypoint.sh"]
