@@ -8,10 +8,6 @@ on:
       - 'jenkins/**'
       - 'dind-agent/**'
 
-env:
-  IMAGE_SERVER: ${{ vars.IMAGE_OWNER }}/jenkins-server
-  IMAGE_AGENT: ${{ vars.IMAGE_OWNER }}/jenkins-agent
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -19,9 +15,9 @@ jobs:
       matrix:
         include:
           - dockerfile: ./jenkins/Dockerfile
-            image: ${{ env.IMAGE_SERVER }}
+            image: ${{ vars.IMAGE_OWNER }}/jenkins-server
           - dockerfile: ./dind-agent/Dockerfile
-            image: ${{ env.IMAGE_AGENT }}
+            image: ${{ vars.IMAGE_OWNER }}/jenkins-agent
     steps:
       -
         name: Docker Meta
