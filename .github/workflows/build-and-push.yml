@@ -12,8 +12,8 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     env:
-      IMAGE_SERVER: ${{ env.IMAGE_OWNER }}/jenkins-server
-      IMAGE_AGENT: ${{ env.IMAGE_OWNER }}/jenkins-agent
+      IMAGE_SERVER: ${{ vars.IMAGE_OWNER }}/jenkins-server
+      IMAGE_AGENT: ${{ vars.IMAGE_OWNER }}/jenkins-agent
     steps:
       -
         name: Checkout
