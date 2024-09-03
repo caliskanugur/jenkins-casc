@@ -8,21 +8,27 @@ on:
       - 'jenkins/**'
       - 'dind-agent/**'
 
+env:
+  IMAGE_SERVER: ${{ vars.IMAGE_OWNER }}/jenkins-server
+  IMAGE_AGENT: ${{ vars.IMAGE_OWNER }}/jenkins-agent
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_SERVER: ${{ vars.IMAGE_OWNER }}/jenkins-server
-      IMAGE_AGENT: ${{ vars.IMAGE_OWNER }}/jenkins-agent
+    strategy:
+      matrix:
+        include:
+          - dockerfile: ./jenkins/Dockerfile
+            image: ${{ env.IMAGE_SERVER }}
+          - dockerfile: ./dind-agent/Dockerfile
+            image: ${{ env.IMAGE_AGENT }}
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
       -
         name: Docker Meta
         id: meta
         uses: docker/metadata-action@v5
         with:
+          images: ${{ matrix.image }}
           tags: |
             type=raw,value=latest
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
@@ -39,18 +45,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       -
-        name: Build and push the server
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          file: ./jenkins/Dockerfile
-          image: ${{ env.IMAGE_SERVER }}
-          tags: ${{ steps.meta.outputs.tags }}
-      -
         name: Build and push the agent
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           push: true
-          file: ./dind-agent/Dockerfile
-          image: ${{ env.IMAGE_AGENT }}
+          file: ${{ matrix.dockerfile }}
           tags: ${{ steps.meta.outputs.tags }}
