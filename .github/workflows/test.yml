@@ -8,8 +8,4 @@ jobs:
     steps:
       - name: Set up and check environment variables
         run: |
-          echo "IMAGE_SERVER: $IMAGE_SERVER"
-          echo "IMAGE_AGENT: $IMAGE_AGENT"
-        env:
-          IMAGE_SERVER: ${{ github.repository_owner }}/jenkins-server
-          IMAGE_AGENT: ${{ github.repository_owner }}/jenkins-agent
+          echo "IMAGE_OWNER: ${{ vars.IMAGE_OWNER }}"
