@@ -1,0 +1,10 @@
+name: Test Workflow
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print repository owner
+        run: echo "Repository owner is ${{ github.repository_owner }}"
