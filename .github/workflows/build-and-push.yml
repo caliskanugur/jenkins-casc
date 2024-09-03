@@ -12,11 +12,9 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     env:
-      IMAGE_SERVER: $GITHUB_REPOSITORY_OWNER/jenkins-server
-      IMAGE_AGENT: $GITHUB_REPOSITORY_OWNER/jenkins-agent
+      IMAGE_SERVER: ${{ env.IMAGE_OWNER }}/jenkins-server
+      IMAGE_AGENT: ${{ env.IMAGE_OWNER }}/jenkins-agent
     steps:
-      - name: Print repository owner
-        run: echo "Repository owner is $GITHUB_REPOSITORY_OWNER"
       -
         name: Checkout
         uses: actions/checkout@v4
