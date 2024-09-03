@@ -7,6 +7,8 @@ on:
     paths:
       - 'jenkins/**'
       - 'dind-agent/**'
+env:
+  IMAGE_OWNER: ${{ vars.IMAGE_OWNER }}
 
 jobs:
   build-and-push:
@@ -15,9 +17,9 @@ jobs:
       matrix:
         include:
           - dockerfile: ./jenkins/Dockerfile
-            image: ${{ vars.IMAGE_OWNER }}/jenkins-server
+            image: ${{ env.IMAGE_OWNER }}/jenkins-server
           - dockerfile: ./dind-agent/Dockerfile
-            image: ${{ vars.IMAGE_OWNER }}/jenkins-agent
+            image: ${{ env.IMAGE_OWNER }}/jenkins-agent
     steps:
       -
         name: Docker Meta
