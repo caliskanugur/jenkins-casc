@@ -34,6 +34,9 @@ jobs:
         name: check image agent 
         run: echo "$IMAGE_AGENT"
       -
+        name: Print repository owner
+        run: echo "Repository owner is ${{ github.repository_owner }}"
+      -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       -
