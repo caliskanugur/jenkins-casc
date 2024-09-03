@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
       -
         name: Build and push the server
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5
         with:
           push: true
           file: ./jenkins/Dockerfile
@@ -48,7 +48,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
       -
         name: Build and push the agent
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5
         with:
           push: true
           file: ./dind-agent/Dockerfile
