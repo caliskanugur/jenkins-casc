@@ -8,17 +8,18 @@ on:
       - 'jenkins/**'
       - 'dind-agent/**'
 
-env:
-  IMAGE_SERVER: "${{ github.repository_owner }}/jenkins-server"
-  IMAGE_AGENT: "${{ github.repository_owner }}/jenkins-agent"
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    env:
+      IMAGE_SERVER: ${{ github.repository_owner }}/jenkins-server
+      IMAGE_AGENT: ${{ github.repository_owner }}/jenkins-agent
     steps:
-      -
-        name: Print repository owner
+      - name: Print repository owner
         run: echo "Repository owner is ${{ github.repository_owner }}"
+      -
+        name: Checkout
+        uses: actions/checkout@v4
       -
         name: Docker Meta
         id: meta
