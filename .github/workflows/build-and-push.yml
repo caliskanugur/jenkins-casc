@@ -17,9 +17,9 @@ jobs:
       matrix:
         include:
           - dockerfile: ./jenkins/Dockerfile
-            image: ${{ env.IMAGE_OWNER }}/jenkins-server
+            image: caliskanugur/jenkins-server
           - dockerfile: ./dind-agent/Dockerfile
-            image: ${{ env.IMAGE_OWNER }}/jenkins-agent
+            image: caliskanugur/jenkins-agent
     steps:
       -
         name: Docker Meta
