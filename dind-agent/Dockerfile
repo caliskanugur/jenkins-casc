@@ -13,4 +13,4 @@ RUN pip3 install --no-cache --upgrade pip setuptools "jenkins-job-builder==5.1.0
 RUN export PATH="/home/jenkins/.local/bin:$PATH"
 
 USER jenkins
-ENTRYPOINT "/entrypoint.sh"
+ENTRYPOINT ["./entrypoint.sh"]
