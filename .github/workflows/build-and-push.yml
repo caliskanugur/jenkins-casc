@@ -17,9 +17,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - dockerfile: ./jenkins/Dockerfile
+          - path: ./jenkins
             image: caliskanugur/jenkins-server
-          - dockerfile: ./dind-agent/Dockerfile
+          - path: ./dind-agent
             image: caliskanugur/jenkins-agent
     steps:
       -
@@ -47,7 +47,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ${{ matrix.path }}
           push: true
-          file: ${{ matrix.dockerfile }}
+          file: ${{ matrix.path }}/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
