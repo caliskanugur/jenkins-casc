@@ -8,7 +8,7 @@ on:
       - 'jenkins/**'
       - 'dind-agent/**'
 env:
-  IMAGE_OWNER: ${{ vars.IMAGE_OWNER }}
+  IMAGE_OWNER: ${{ github.repository_owner }}
 
 jobs:
   build-and-push:
@@ -17,9 +17,9 @@ jobs:
       matrix:
         include:
           - dockerfile: ./jenkins/Dockerfile
-            image: caliskanugur/jenkins-server
+            image: ${{ env.IMAGE_OWNER }}/jenkins-server
           - dockerfile: ./dind-agent/Dockerfile
-            image: caliskanugur/jenkins-agent
+            image: ${{ env.IMAGE_OWNER }}/jenkins-agent
     steps:
       -
         name: Checkout
@@ -40,7 +40,7 @@ jobs:
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ env.IMAGE_OWNER }}
           password: ${{ secrets.DOCKER_TOKEN }}
       -
         name: Build and push
