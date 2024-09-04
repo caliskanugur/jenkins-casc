@@ -29,7 +29,6 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          context: .
           images: ${{ matrix.image }}
           tags: |
             type=raw,value=latest
