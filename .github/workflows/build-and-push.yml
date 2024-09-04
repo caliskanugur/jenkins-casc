@@ -32,7 +32,6 @@ jobs:
         with:
           images: ${{ matrix.image }}
           tags: |
-            type=raw,value=latest
             type=semver,pattern={{version}}
       -
         name: Set up Docker Buildx
