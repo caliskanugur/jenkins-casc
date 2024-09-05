@@ -2,7 +2,6 @@ FROM jenkins/jnlp-agent-docker@sha256:eb9ab5139a598c3a210d5a491d3cc31db501cb870b
 ENV PYTHONUNBUFFERED=1
 USER root
 
-
 COPY entrypoint.sh /entrypoint.sh
 RUN chown jenkins:jenkins /entrypoint.sh
 RUN chmod +x /entrypoint.sh
