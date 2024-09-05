@@ -16,6 +16,5 @@ vendor
 # Misc
 *.pem
 
-
 # act
 *.secrets
