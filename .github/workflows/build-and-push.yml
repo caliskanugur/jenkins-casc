@@ -45,6 +45,7 @@ jobs:
           images: ${{ matrix.image }}
           tags: |
             type=semver,pattern={{version}}
+            type=match,pattern=v(.*),value=latest
             type=raw,value=head
       -
         name: Login to Docker Hub
