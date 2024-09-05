@@ -1,4 +1,4 @@
-FROM jenkins/jnlp-agent-docker
+FROM jenkins/jnlp-agent-docker@sha256:eb9ab5139a598c3a210d5a491d3cc31db501cb870b011035e9cdbc0b5e661dfa
 ENV PYTHONUNBUFFERED=1
 USER root
 
