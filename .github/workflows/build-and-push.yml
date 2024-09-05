@@ -1,4 +1,3 @@
-# TODO: Update to pinned versions
 name: Build and Push
 
 on:
@@ -27,9 +26,9 @@ jobs:
       matrix:
         include:
           - path: ./jenkins
-            image: ${{ needs.prepare-matrix.outputs.IMAGE_OWNER }}/jenkins-server
+            image: caliskanugur/jenkins-server
           - path: ./dind-agent
-            image: ${{ needs.prepare-matrix.outputs.IMAGE_OWNER }}/jenkins-agent
+            image: caliskanugur/jenkins-agent
     steps:
       -
         name: Checkout
