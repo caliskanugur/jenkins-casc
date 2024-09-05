@@ -1,26 +1,25 @@
-# TODO: Update to pinned versions
-name: Build and Push
+name: build-and-push-two-jobs
 
 on:
   push:
     paths:
       - 'jenkins/**'
       - 'dind-agent/**'
-    branches:
-      - "master"
-    tags:
-      - "v*"
-  pull_request:
-    branches:
-      - "master"
-    paths:
-      - 'jenkins/**'
-      - 'dind-agent/**'
-
 env:
   IMAGE_OWNER: ${{ github.repository_owner }}
 
 jobs:
+  prepare-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      IMAGE_OWNER: ${{ env.IMAGE_OWNER }}
+    steps:
+      -
+        name: Prepare Outputs
+        run: |
+          echo "IMAGE_OWNER=${{ env.IMAGE_OWNER }}" >> $GITHUB_OUTPUT
+
+
   build-and-push:
     runs-on: ubuntu-latest
     strategy:
