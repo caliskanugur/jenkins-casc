@@ -1,4 +1,4 @@
-FROM jenkins/jnlp-agent-docker
+
 ENV PYTHONUNBUFFERED=1
 USER root
 
