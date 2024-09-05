@@ -13,6 +13,9 @@ on:
   pull_request:
     branches:
       - "master"
+    paths:
+      - 'jenkins/**'
+      - 'dind-agent/**'
 
 env:
   IMAGE_OWNER: ${{ github.repository_owner }}
